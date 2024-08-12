@@ -18,8 +18,48 @@ To run this project locally, follow these steps:
    ```bash
    git clone <your-repository-url>
    cd <repository-directory>
+   ```
+
+2. **Install the required dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Create a virtual environment** (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+
+4. **Ensure that the `.env` file contains any API keys** needed for models from HuggingFace or OpenAI.
+
+5. **Start the Streamlit application**:
+   ```bash
+   streamlit run app.py
+   ```
+
+6. **Access the application**:
+   Open your web browser and go to `http://localhost:8501` to access the Streamlit application.
+
+7. **Upload PDF files**:
+   In the application, click on the "Upload PDF" button to select and upload one or multiple PDF files.
+
+8. **Interact with the conversational AI**:
+   Once the PDF files are uploaded and processed, you can ask questions and interact with the conversational AI model.
+
+9. **Manage conversational context**:
+   The application maintains conversational context using a buffer memory, allowing you to have multi-turn conversations.
+
+10. **Stop the application**:
+    To stop the Streamlit application, press `Ctrl + C` in the terminal where it is running.
+
+That's it! You can now explore and use the Retrieval-Augmented Generation (RAG) system implemented in this Streamlit application.
+
 
 
 ### Instructions:
 
 - **Ensure that the `.env` file contains any API keys** needed for models from HuggingFace or OpenAI.
+
+
+![alt text](image.png)
