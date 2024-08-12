@@ -22,5 +22,4 @@ To run this project locally, follow these steps:
 
 ### Instructions:
 
-- **Replace `<your-repository-url>` with the actual URL of your Git repository** in the installation section.
 - **Ensure that the `.env` file contains any API keys** needed for models from HuggingFace or OpenAI.
