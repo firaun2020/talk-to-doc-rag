@@ -53,9 +53,14 @@ def get_conversation_chain(vector_store):
 
 def handle_user_input(user_question):
     response = stl.session_state.conversation({"question": user_question})
-    stl.write(response)
-    return response
+    stl.session_state.chat_history = response["chat_history"]
 
+    for i, message in enumerate(reversed(stl.session_state.chat_history)):
+        if i % 2 == 0:
+           stl.write(bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
+        else:
+            stl.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
+            
 
 def main():
     load_dotenv()
@@ -66,14 +71,20 @@ def main():
     if "conversation" not in stl.session_state:
         stl.session_state.conversation = None
 
+    if "chat_history" not in stl.session_state:
+        stl.session_state.chat_history = None
+
     stl.header("My RAG Attempt! :robot:")
-    user_question = stl.text_input("Start the interview: ")
+
+
+
+    user_question = stl.text_input("Start the interview: ", value="", key="uq")
     if user_question:
         handle_user_input(user_question)
 
 
-    stl.write(user_template.replace("{{MSG}}", "Hello Robot"), unsafe_allow_html=True)
-    stl.write(bot_template.replace("{{MSG}}", "Hello Human"), unsafe_allow_html=True)
+    # stl.write(user_template.replace("{{MSG}}", "Hello Robot"), unsafe_allow_html=True)
+    # stl.write(bot_template.replace("{{MSG}}", "Hello Human"), unsafe_allow_html=True)
 
     with stl.sidebar:
         stl.subheader("Upload CV")
@@ -93,6 +104,9 @@ def main():
 
                 # Conversation chain
                 stl.session_state.conversation = get_conversation_chain(vector_store)
+
+                stl.write("Processing Completed")
+
 
    
 
